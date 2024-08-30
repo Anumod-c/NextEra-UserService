@@ -39,8 +39,13 @@ export default class MessageHandlers{
                 console.log("Handling Operation for google_login",operations,data);
                 response = await userController.googleLogin(data)
                 break;
-                 
-                
+            case 'forgot_pass_resend_otp':
+                console.log('data reached indside the forgot pass resent otp',operations,data);
+                response = await userController.forgotresendOtp(data);
+                console.log('response got from forgot pass resend otp',response);
+                break;
+           
+
         }
         await RabbitMQClient.produce(response,correlationId,replyTo)
 

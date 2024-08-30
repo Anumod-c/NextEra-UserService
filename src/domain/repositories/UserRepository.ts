@@ -55,7 +55,7 @@
                 const otpEntry = await TemporaryUser.findOne({ otp }).exec();
                 console.log('llllllllllllllllllll', otpEntry)
                 if (!otpEntry) {
-                    return { success: false, message: 'Invalid OTP', forgotPass: true };
+                    return { success: false, message: 'Invalid OTP. Please check and try again.', forgotPass: true };
                 }
                 // Optionally, check if OTP has expired
                 // const isExpired = otpEntry.expiresAt < new Date();

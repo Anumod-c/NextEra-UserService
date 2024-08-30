@@ -5,6 +5,7 @@ import { generateOtp } from "../../utils/generateOtp";
 import config from "../../infrastructure/config/config";
 import { TemporaryUser } from "../../model/TempUser";
 import { OAuth2Client } from 'google-auth-library'
+import { sendOtpMail } from "../../utils/emailVerifications";
 
 
 export class UserService {
@@ -34,7 +35,7 @@ export class UserService {
                     userData: userData
                 });
                 await temporaryUser.save();
-
+                await sendOtpMail(userData.email,otp)
                 //send otp to mail
 
 
@@ -104,6 +105,8 @@ export class UserService {
                 })
                 await tempData.save()
                 // Ideally, send OTP to the user's email here
+                await sendOtpMail(email,otp)
+
                 return { forgotPass, user: { email: user.email, name: user.name }, otp, success: true, message: "Found user with this email" }
             } else {
                 return { success: false, message: "No user found with this email" };
@@ -172,6 +175,31 @@ export class UserService {
         } catch (error) {
             const err = error as Error;
             throw new Error(`Google  login failed: ${err.message}`);
+        }
+    }
+    async forgotresendOtp(email:string):Promise<any>{
+        try{
+            const user =  await this.userRepo.findByEmail(email);
+            if(!user){
+                return {success:false,message:"User not found"};
+            }
+            const otp = generateOtp();
+            console.log('resend otp generated',otp);
+            const temporaryUser= await TemporaryUser.findOneAndUpdate(
+                { 'userData.email': email },
+                { otp: otp, createdAt: new Date() },
+                { new: true, upsert: true });
+
+                if(!temporaryUser){
+                    return {success:false,message:"Temporary user data not found"};
+                }
+                await sendOtpMail(email,otp);
+                return {success:true,message:"OTP resent succesfully",otp}
+
+        }catch(error){
+            const err = error as Error;
+            console.error("Error in resendOtp:", err.message);
+            return { success: false, message: `Error resending OTP: ${err.message}` };
         }
     }
 

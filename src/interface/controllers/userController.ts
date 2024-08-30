@@ -75,6 +75,17 @@ class UserController {
         return result
             
     }
+    async forgotresendOtp(data:any){
+        try{
+
+            console.log('resend otp in controller reached',data);
+            const {email}= data;
+            const result =  await this.userService.forgotresendOtp(email);
+            return result;
+        }catch(error){
+            console.log("Errorin resendOtp method in usercontroller",error)
+        }
+    }
 }
 
 export const userController = new UserController();
