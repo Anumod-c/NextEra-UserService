@@ -1,3 +1,4 @@
+import { adminController } from '../../interface/controllers/adminController';
 import { userController } from '../../interface/controllers/userController';
 import RabbitMQClient from './clients';
 
@@ -44,7 +45,18 @@ export default class MessageHandlers{
                 response = await userController.forgotresendOtp(data);
                 console.log('response got from forgot pass resend otp',response);
                 break;
-           
+            case 'get_users':
+                console.log('reached user service for fetching users');
+                response  = await adminController.userList()
+                break;
+
+            case 'get_student_count':
+                console.log('reached user service for fetching users');
+                response  = await adminController.getStudentCount()
+                break;
+            case 'change_status':
+                response = await adminController.changeStatus(data);
+                break;
 
         }
         await RabbitMQClient.produce(response,correlationId,replyTo)

@@ -7,6 +7,7 @@ export interface IUser{
     phone :string;
     password : string;
     profilePicture? : string;
+    status:boolean
     created_At? :Date;
 }
 

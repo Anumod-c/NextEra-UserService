@@ -56,6 +56,7 @@ export class UserService {
             const otp = otpObject.otp;
             console.log('Verifying OTP', otp);
             const temporaryUser = await TemporaryUser.findOne({ otp });
+            
             if (!temporaryUser) {
                 return { success: false, message: "Invalid OTP" };
             } console.log('temporaryUser', temporaryUser);
@@ -149,6 +150,8 @@ export class UserService {
     }
     async googleLogin(credential: string): Promise<any> {
         try {
+            console.log('hyyyy');
+            
             const client = new OAuth2Client(config.googleClientId);
             const ticket = await client.verifyIdToken({
                 idToken: credential,

@@ -9,7 +9,7 @@ export default class Producer{
             this.channel.sendToQueue(replyQueue,Buffer.from(JSON.stringify(data)),{
                 correlationId:corelationId
             })
-            console.log('message produced');
+            console.log('message produced back');
             
         }catch(error){
             console.log("Erroor in prodcing message back to apigateway",error)
