@@ -57,6 +57,21 @@ export default class MessageHandlers{
             case 'change_status':
                 response = await adminController.changeStatus(data);
                 break;
+            case 'add_courseId':
+                response = await userController.addCourseToUser(data);
+                break;
+            case 'getUserDetails':
+                response= await userController.getUserDetails(data);
+                break;
+            case 'editProfile':
+                response = await userController.editProfile(data);
+                break;
+            case 'updateProfilePicture':
+                response = await userController.updateProfilePicture(data);
+                break;
+            case 'checkUserBlocked':
+                response = await userController.checkUserBlocked(data);
+                break;
 
         }
         await RabbitMQClient.produce(response,correlationId,replyTo)

@@ -205,6 +205,47 @@ export class UserService {
             return { success: false, message: `Error resending OTP: ${err.message}` };
         }
     }
+    async addCourseToUser(userID:string,courseId:string):Promise<any>{
+        try {
+           const result =await this.userRepo.addCourseToUser(userID,courseId);
+           return result
+        } catch (error) {
+            console.log('Error in adding addCourseToUser',error)
+        }
+    }
+    async getUserDetails(userId: string){
+        try {
+            const result = await this.userRepo.getUserDetails(userId);
+            return result
+        } catch (error) {
+            console.log("Error in fetching user details",error)
+        }
+    }
+    async editProfile(data:any){
+        try{
+            const result = await this.userRepo.editProfile(data);
+            return result;
+        }catch(error){
+            console.log("error in edit profile",error)
+        }
+    }
+    async updateProfilePicture(data:any){
+        try {
+            const result =await this.userRepo.updateProfilePicture(data);
+            return result;
+        } catch (error) {
+            console.log("Error in updatating profile picture in usercase",error)
+        }
+    }
+    async checkUserBlocked(userId:string){
+        try{
+            const result = await this.userRepo.checkUserBlocked(userId);
+            return result
+        }catch(error){
+            console.log("Error in isblocked middleware",error)
+        }
+    }
+    
 
 }
 

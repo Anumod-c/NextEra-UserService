@@ -1,20 +1,28 @@
-import { ObjectId } from "mongoose";
+import { ObjectId, Types } from "mongoose";
 
-export interface IUser{
-    // _id?: ObjectId;
-    name : string;
+export interface IUser {
+    name: string;
     email: string;
-    phone :string;
-    password : string;
-    profilePicture? : string;
-    status:boolean
-    created_At? :Date;
+    phone: string;
+    password: string;
+    bio:string;
+    age:number;
+    twitter:string;
+    facebook:string;
+    linkedin:string;
+    instagram:string;
+    profilePicture?: string;
+    status: boolean;
+    purchasedCourses: Types.ObjectId[];  // Array of ObjectIds for purchased courses
+    wishlist: Types.ObjectId[];          // Array of ObjectIds for wishlist
+
+    created_At?: Date;
 }
 
 
-export  interface ITemporaryUser {
-    otp:string;
-    userData:IUser;
-    created_At? :Date;
+export interface ITemporaryUser {
+    otp: string;
+    userData: IUser;
+    created_At?: Date;
 }
 

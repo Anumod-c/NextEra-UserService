@@ -86,6 +86,55 @@ class UserController {
             console.log("Errorin resendOtp method in usercontroller",error)
         }
     }
+    async addCourseToUser(data:any){
+        try {
+            const { userId, courseId } = data;
+            console.log('Adding course to user:',data, { userId, courseId });
+    
+            const result = await this.userService.addCourseToUser(userId, courseId);
+            console.log('Course added to user successfully:', result);
+            return result;
+        } catch (error) {
+            console.log('Error in adding course to user:', error);
+            throw new Error('Failed to add course to user');
+        }
+    }
+    async getUserDetails(userId:string){
+        try {
+            const result = await this.userService.getUserDetails(userId);
+            return result;
+        } catch (error) {
+            console.log('Error in adding course to user:', error);
+            throw new Error('Failed to add course to user');
+        }
+    }
+    async editProfile(data:any){
+        try {
+            console.log("edit data reached  editprofiele",data);
+            const result = await this.userService.editProfile(data);
+            return result;
+        } catch (error) {
+            console.log("Error in editin user details in controller")
+        }
+    }
+    async updateProfilePicture(data:any){
+        try {
+            const result = await this.userService.updateProfilePicture(data);
+            return result;
+        } catch (error) {
+            console.log("Error in updating  profilpicture")
+        }
+    }
+    async checkUserBlocked(userId:string){
+        try {
+            const result = await this.userService.checkUserBlocked(userId);
+            return result
+        } catch (error) {
+            console.log('Error in checking user blockedmiddleware',error)
+        }
+    }
+    
+
 }
 
 export const userController = new UserController();

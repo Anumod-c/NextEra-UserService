@@ -20,7 +20,7 @@ export class AdminRepository{
 
     async getStudentCount(){
         try{
-            const userCount = await User.find({}).countDocuments();
+            const userCount = await User.countDocuments()
             console.log('usercount',userCount);
 
             return userCount

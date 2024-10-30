@@ -1,4 +1,4 @@
-import mongoose,{Document,Schema} from "mongoose";
+import mongoose,{Document,Schema, Types} from "mongoose";
 
 import { IUser } from "../domain/entities/IUser";
 
@@ -20,6 +20,26 @@ const userSchema :Schema = new Schema({
     password:{
         type: String,
         required: true
+    },    bio: {
+        type: String,  // Added bio field
+    },
+    age: {
+        type: Number,  // Added age field
+    },
+    profilePicture:{
+        type:String,
+    },
+    instagram: {
+        type: String,  // Added Instagram field
+    },
+    twitter: {
+        type: String,  // Added Twitter field
+    },
+    facebook: {
+        type: String,  // Added Facebook field
+    },
+    linkedin: {
+        type: String,  // Added LinkedIn field
     },
     created_at:{
         type:Date,
@@ -29,7 +49,13 @@ const userSchema :Schema = new Schema({
     status:{
         type:Boolean,
         default:true,
-    }
+    },
+    purchasedCourses:[{
+        type:Schema.Types.ObjectId,
+    }],
+    wishlist:[{
+        type:Schema.Types.ObjectId,
+    }]
 })
 
 
