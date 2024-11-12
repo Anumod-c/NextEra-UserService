@@ -3,12 +3,8 @@ import config from '../config/config';
 import RabbitMQClient  from '../rabbitMQ/clients'
 import { databaseConnection } from '../database/mongodb';
 
-//manually imported no suggestion came
-
-
 const app= express();
 app.use(express.json());
-
 const startServer = async ()=>{
     try{
         //database connection
