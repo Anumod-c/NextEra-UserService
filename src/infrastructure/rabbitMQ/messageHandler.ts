@@ -47,7 +47,7 @@ export default class MessageHandlers{
                 break;
             case 'get_users':
                 console.log('reached user service for fetching users');
-                response  = await adminController.userList()
+                response  = await adminController.userList(data)
                 break;
 
             case 'get_student_count':

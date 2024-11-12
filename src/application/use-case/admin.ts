@@ -7,9 +7,9 @@ export class AdminService{
         this.adminRepo= new AdminRepository();
     }
 
-    async userList(){
+    async userList(page: number = 1, limit: number){
         try{
-            const result = await this.adminRepo.userList();
+            const result = await this.adminRepo.userList(page, limit);
             return result
         }catch(error){
             console.log('error in userlist in admin.ts')

@@ -3,13 +3,18 @@ import { IUser } from "../../entities/IUser";
 
 
 export class AdminRepository{
-    async userList(){
+    async userList(page: number = 1, limit: number){
         try{
+            const skip = (page - 1) * limit;
+
             console.log('userlist in adminrepository');
-            const userData = await User.find({}).sort({_id:-1});
+            const userData = await User.find({}).sort({_id:-1}).skip(skip).limit(limit);
+            const totalCount = await User.countDocuments();
+
             console.log('succesully fetched userdata',userData);
-            
-            return userData
+            const totalPages = Math.ceil(totalCount / limit);
+
+            return {userData, totalPages,currentPage: page,success:true}
         }catch(error){
             const err = error as Error;
             console.log("Error user listing admin :", err);

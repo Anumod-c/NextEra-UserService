@@ -7,9 +7,11 @@ class AdminController{
     }
 
 
-    async userList(){
+    async userList(data: {  page: number, limit: number }){
         try{
-            const result  =  await this.adminService.userList();
+            const {  page, limit } = data;
+
+            const result  =  await this.adminService.userList(page, limit);
             return result
         }catch(error){
             console.log('errror in uselist in admincontroller')
