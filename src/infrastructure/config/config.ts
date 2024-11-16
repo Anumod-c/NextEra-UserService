@@ -1,22 +1,21 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
+dotenv.config();
 
-dotenv.config()
+const config = {
+  port: parseInt(process.env.PORT as string) || 5001,
 
+  RABBITMQ_URL: process.env.RABBITMQ_URL || "amqp://localhost",
 
-const config={
-    port:parseInt(process.env.PORT as string)|| 5001,
+  DATABASE_URL:
+    process.env.DATABASE_URL || "mongodb://0.0.0.0:27017/NextEra-UserService",
 
-    RABBITMQ_URL :process.env.RABBITMQ_URL || 'amqp://localhost',
+  googleClientId:
+    process.env.GOOGLE_CLIENT_ID ||
+    "335970622446-fmad2vt6p80hhmjqgu8evh9tcs9letnl.apps.googleusercontent.com",
 
-    DATABASE_URL :process.env.DATABASE_URL || 'mongodb://0.0.0.0:27017/NextEra-UserService',
-    
-    googleClientId :process.env.GOOGLE_CLIENT_ID ||'335970622446-fmad2vt6p80hhmjqgu8evh9tcs9letnl.apps.googleusercontent.com',
+  EMAIL: process.env.EMAIL,
+  EMAIL_PASS: process.env.EMAIL_PASS,
+};
 
-    EMAIL:process.env.EMAIL,
-    EMAIL_PASS : process.env.EMAIL_PASS
-
-}
-
-
-export default config
+export default config;

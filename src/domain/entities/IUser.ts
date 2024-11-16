@@ -1,6 +1,7 @@
 import { ObjectId, Types } from "mongoose";
 
 export interface IUser {
+    
     name: string;
     email: string;
     phone: string;
@@ -13,9 +14,8 @@ export interface IUser {
     instagram:string;
     profilePicture?: string;
     status: boolean;
-    purchasedCourses: Types.ObjectId[];  // Array of ObjectIds for purchased courses
-    wishlist: Types.ObjectId[];          // Array of ObjectIds for wishlist
-
+    purchasedCourses: Types.ObjectId[];  
+    wishlist: Types.ObjectId[];          
     created_At?: Date;
 }
 
@@ -25,4 +25,10 @@ export interface ITemporaryUser {
     userData: IUser;
     created_At?: Date;
 }
+
+export interface IUpdateProfilePicture {
+    userId: string;
+    profilePicture: string;
+}
+
 
