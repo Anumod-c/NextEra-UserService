@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer';
-import fs from 'fs';
 
 import config from '../infrastructure/config/config';
 
@@ -12,7 +11,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-export const sendOtpMail = async (to:string,otp:string):Promise<void>=>{
+export const sendOtpMail = async (to:string,name:string,otp:string):Promise<void>=>{
     const mailOptions = {
         from: config.EMAIL,
         to,
@@ -25,7 +24,7 @@ export const sendOtpMail = async (to:string,otp:string):Promise<void>=>{
             </div>
             <div style="padding: 20px;">
                 <h1 style="color: #333;">Your OTP Code</h1>
-                <p style="font-size: 16px; color: #555;">Dear user,</p>
+                <p style="font-size: 16px; color: #555;">Dear ${name},</p>
                 <p style="font-size: 16px; color: #555;">Your OTP code is <strong style="font-size: 24px;">${otp}</strong></p>
                 <p style="font-size: 16px; color: #555;">Please use this code to complete your verification process.</p>
                 <p style="font-size: 16px; color: #555;">Thank you,</p>

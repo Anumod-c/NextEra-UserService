@@ -33,7 +33,8 @@ export class UserService {
         console.log("generated OTP", otp);
         console.log(userData, "USER DATA");
         const tempData = await this.userRepo.saveTempUser(otp, userData);
-        await sendOtpMail(userData.email, otp);
+        const {name,email}=userData
+        await sendOtpMail(email,name, otp);
         return {
           message: "Verify the otp to complete registeration",
           forgotPass,
@@ -112,7 +113,7 @@ export class UserService {
           createdAt: new Date(),
         });
         await tempData.save();
-        await sendOtpMail(email, otp);
+        await sendOtpMail(email,user.name, otp);
         return {
           forgotPass,
           user: { email: user.email, name: user.name },
@@ -211,7 +212,7 @@ export class UserService {
       if (!temporaryUser) {
         return { success: false, message: "Temporary user data not found" };
       }
-      await sendOtpMail(email, otp);
+      await sendOtpMail(email,user.name,otp);
       return { success: true, message: "OTP resent succesfully", otp };
     } catch (error) {
       const err = error as Error;
